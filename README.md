@@ -21,4 +21,4 @@
 
 Все блоки, элементы и их стили подготовлены и раположены в проекте по БЭМ-методологии  
 
-Работа размещена на gh-pages: https://nedvov.github.io/mesto-react/
+Работа размещена на gh-pages: https://nedvov.github.io/react-mesto-auth/
