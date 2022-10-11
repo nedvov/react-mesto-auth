@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Link, Redirect, useHistory } from 'react-router-dom';
+import {Route, Switch, Link, Redirect, useHistory} from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -10,7 +10,7 @@ import AddTilesPopup from './AddTilesPopup';
 import SurePopup from './SurePopup';
 import Sign from './Sign';
 import ProtectedRoute from './ProtectedRoute';
-import { api, sign_api} from '../utils/Api.js';
+import {api, sign_api} from '../utils/Api.js';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import sorryImage from '../images/ups2.png';
 import successImage from '../images/success.png';

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import React from 'react';
 import burgerImage from '../images/header_burger.png';
 import closeImage from '../images/header_close.png'; 
