@@ -1,63 +1,70 @@
-import {Link} from 'react-router-dom';
-import React from 'react';
-import burgerImage from '../images/header_burger.png';
-import closeImage from '../images/header_close.png'; 
+import { Link } from "react-router-dom";
+import React from "react";
+import burgerImage from "../images/header_burger.png";
+import closeImage from "../images/header_close.png";
 
-function Header({loggedIn, onButtonClick, buttonText, linkTo, linkText, email}) {
-    const [isBurgerOpen, setBurgerOpenState] = React.useState(false);
-    const [width, setWidth] = React.useState(window.innerWidth);
-    const [clientWidth, setClientWidth] = React.useState(document.documentElement.clientWidth);
+function Header({
+    loggedIn,
+    onButtonClick,
+    buttonText,
+    linkTo,
+    linkText,
+    email,
+}) {
+    const [isBurgerOpened, setIsBurgerOpened] = React.useState(false);
 
     function clickBurger() {
-        setBurgerOpenState(!isBurgerOpen)
+        setIsBurgerOpened(!isBurgerOpened);
     }
 
-    function updateWidth () {
-        setWidth(window.innerWidth);
-        setClientWidth(document.documentElement.clientWidth)
-    };
-
-    React.useEffect(() => {
-        window.addEventListener("resize", updateWidth);
-        return () => window.removeEventListener("resize", updateWidth);
-    });
-
-    return (        
+    return (
         <header className="header">
-            {
-            (isBurgerOpen && width <= 767) &&
-                <div className="header__info">
+            {isBurgerOpened && (
+                <div className={"header__info header__info_hidden-desktop"}>
                     <p className="header__email">{email}</p>
-                    <button type="button" className="header__button" onClick={onButtonClick}>{buttonText}</button>
-                    <div className="header__line" style={{width: clientWidth}}/>
-                </div>                
-            }            
+                    <button
+                        type="button"
+                        className="header__button"
+                        onClick={onButtonClick}
+                    >
+                        {buttonText}
+                    </button>
+                    <div className="header__line header__line_no-margin" />
+                </div>
+            )}
             <div className="header__main">
                 <div className="header__logo" />
-                {loggedIn ?
-                    (width <= 767 ?
-                        <button 
-                            type="button" 
-                            className="header__burger" 
+                {loggedIn ? (
+                    <>
+                        <button
+                            type="button"
+                            className={
+                                isBurgerOpened
+                                    ? "header__burger header__burger_opened"
+                                    : "header__burger"
+                            }
                             onClick={clickBurger}
-                            style={isBurgerOpen ? {backgroundImage: `url(${closeImage})`} : {backgroundImage: `url(${burgerImage})`}}
                         />
-
-                    :
-                        <div className="header__info">
+                        <div className="header__info header__info_hidden-mobile">
                             <p className="header__email">{email}</p>
-                            <button type="button" className="header__button" onClick={onButtonClick}>{buttonText}</button>
+                            <button
+                                type="button"
+                                className="header__button"
+                                onClick={onButtonClick}
+                            >
+                                {buttonText}
+                            </button>
                         </div>
-                    )
-                :
-                    <Link to={linkTo} className="header__link">{linkText}</Link>
-                }                
-            </div>  
-            {
-                width <= 767 && <div className="header__line" style={{marginBottom: '40px', width: clientWidth}}/>
-            }  
+                    </>
+                ) : (
+                    <Link to={linkTo} className="header__link">
+                        {linkText}
+                    </Link>
+                )}
+            </div>
+            <div className="header__line" />
         </header>
     );
-  }
-  
+}
+
 export default Header;
