@@ -3,6 +3,15 @@ import React from "react";
 function PopupWithImage({ isOpened, onClose, card, isSystem }) {
     const popup = React.useRef();
 
+    function closeByOuterClick(evt) {
+        const withinBoundaries = evt.nativeEvent.path.includes(
+            popup.current.children[0]
+        );
+        if (!withinBoundaries) {
+            onClose();
+        }
+    }
+
     React.useEffect(() => {
         function closeByEscape(evt) {
             if (evt.key === "Escape") {
@@ -10,18 +19,8 @@ function PopupWithImage({ isOpened, onClose, card, isSystem }) {
             }
         }
 
-        function closeByOuterClick(evt) {
-            const withinBoundaries = evt
-                .composedPath()
-                .includes(popup.current.children[0]);
-            if (!withinBoundaries) {
-                onClose();
-            }
-        }
-
         if (isOpened) {
             document.addEventListener("keydown", closeByEscape);
-            popup.current.addEventListener("click", closeByOuterClick);
             return () => {
                 document.removeEventListener("keydown", closeByEscape);
             };
@@ -33,6 +32,7 @@ function PopupWithImage({ isOpened, onClose, card, isSystem }) {
             ref={popup}
             className={isOpened ? "popup popup_opened" : "popup"}
             id="image-popup"
+            onClick={closeByOuterClick}
         >
             <div className="popup__image-container">
                 <button

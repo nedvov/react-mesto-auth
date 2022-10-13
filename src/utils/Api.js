@@ -17,26 +17,26 @@ class Api {
         });
     }
 
-    async _request(url, options) {
+    _doRequest(url, options) {
         return fetch(url, options).then(this.#isOK);
     }
 
     getInitialCards() {
-        return this._request(`${this._baseUrl}/cards`, {
+        return this._doRequest(`${this._baseUrl}/cards`, {
             method: "GET",
             headers: this._headers,
         });
     }
 
     getUserInfo() {
-        return this._request(`${this._baseUrl}/users/me`, {
+        return this._doRequest(`${this._baseUrl}/users/me`, {
             method: "GET",
             headers: this._headers,
         });
     }
 
     addNewCard(name, link) {
-        return this._request(`${this._baseUrl}/cards`, {
+        return this._doRequest(`${this._baseUrl}/cards`, {
             method: "POST",
             headers: this._headers,
             body: JSON.stringify({
@@ -47,7 +47,7 @@ class Api {
     }
 
     setUserInfo(name, job) {
-        return this._request(`${this._baseUrl}/users/me`, {
+        return this._doRequest(`${this._baseUrl}/users/me`, {
             method: "PATCH",
             headers: this._headers,
             body: JSON.stringify({
@@ -58,21 +58,21 @@ class Api {
     }
 
     deleteCard(cardId) {
-        return this._request(`${this._baseUrl}/cards/${cardId}`, {
+        return this._doRequest(`${this._baseUrl}/cards/${cardId}`, {
             method: "DELETE",
             headers: this._headers,
         });
     }
 
     likeCard(cardId, isLiked) {
-        return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
+        return this._doRequest(`${this._baseUrl}/cards/${cardId}/likes`, {
             method: !isLiked ? "PUT" : "DELETE",
             headers: this._headers,
         });
     }
 
     setUserAvatar(link) {
-        return this._request(`${this._baseUrl}/users/me/avatar`, {
+        return this._doRequest(`${this._baseUrl}/users/me/avatar`, {
             method: "PATCH",
             headers: this._headers,
             body: JSON.stringify({
@@ -82,7 +82,7 @@ class Api {
     }
 
     signIn(password, email) {
-        return this._request(`${this._baseUrl}/signin`, {
+        return this._doRequest(`${this._baseUrl}/signin`, {
             method: "POST",
             headers: this._headers,
             body: JSON.stringify({
@@ -93,7 +93,7 @@ class Api {
     }
 
     signUp(password, email) {
-        return this._request(`${this._baseUrl}/signup`, {
+        return this._doRequest(`${this._baseUrl}/signup`, {
             method: "POST",
             headers: this._headers,
             body: JSON.stringify({
@@ -104,7 +104,7 @@ class Api {
     }
 
     signCheck(token) {
-        return this._request(`${this._baseUrl}/users/me`, {
+        return this._doRequest(`${this._baseUrl}/users/me`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

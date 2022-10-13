@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import burgerImage from "../images/header_burger.png";
-import closeImage from "../images/header_close.png";
 
 function Header({
     loggedIn,
@@ -14,7 +12,7 @@ function Header({
     const [isBurgerOpened, setIsBurgerOpened] = React.useState(false);
 
     function clickBurger() {
-        setIsBurgerOpened(!isBurgerOpened);
+        setIsBurgerOpened((isBurgerOpened) => (!isBurgerOpened));
     }
 
     return (
